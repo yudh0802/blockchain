@@ -19,9 +19,9 @@ class Blockchain
 
 block = {
 	'index' => @chain.length + 1,
-	'time' => Time.now.to_i,
+	'time' => Time.now,
 	'nonce' => nonce,
-	'pre block' => Digest::SHA256.hexdigest(JSON.dump(last_block)) #last_block.to_s 도 됌
+	'pre block' => Digest::SHA256.hexdigest(last_block.to_s) #last_block.to_s 도 됌
 }
 
 @chain << block

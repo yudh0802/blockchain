@@ -13,6 +13,7 @@ get '/' do
 		message << "Nonce is " + c['nonce'].to_s + "<br>"
 		message << "Time is " + c['time'].to_s  + "<br>"
 		message << "Pre block is " + c['pre block'].to_s + "<br>"
+		message << "Current block is " + Digest::SHA256.hexdigest(c.to_s) + "<br>"
 		message << "<hr>"
 	end
 
