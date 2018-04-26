@@ -7,12 +7,22 @@ require './block'
 b = Blockchain.new
   
 get '/' do 
-	"지금 전체 블럭수는 :" + b.my_blocks.to_s
+	message = ""
+	b.current_chain.each do |c|
+		message << "Index is " + c['index'].to_s + "<br>"
+		message << "Nonce is " + c['nonce'].to_s + "<br>"
+		message << "Time is " + c['time'].to_s  + "<br>"
+		message << "Pre block is " + c['pre block'].to_s + "<br>"
+		message << "<hr>"
+	end
+
+message
+
 end	
 	
-get '/mine' do 
+get '/mine' do
 
-	 b.mining.to_s + " ㅇㅇ"
 
-	
+	 "블럭찾았다 " + b.mining.to_s
+
 end
