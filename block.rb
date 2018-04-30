@@ -4,6 +4,15 @@ class Blockchain
 
 	def initialize
 		@chain = []
+		@transaction = []
+	end
+
+	def trans(sender, receiver, amount) #trans를 돌릴 때는 sender, receiver, amount가 있어야 돌린다.라는 의미
+		puts sender
+		puts receiver
+		puts amount
+
+
 	end
 
 	def mining

@@ -22,8 +22,13 @@ message
 end	
 	
 get '/mine' do
-
-
 	 "블럭찾았다 " + b.mining.to_s
+end
 
+get '/transaction' do
+	"person who send : " + params["sender"] +
+	"<br>" + "person who receive : " + params["receiver"] +"<br>"
+	+ "amount of transaction : " + params["amount"]
+
+	b.trans(params["sender"], params["receiver"], params["amount"])
 end
