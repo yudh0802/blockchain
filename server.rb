@@ -14,6 +14,7 @@ get '/' do
 		message << "Time is " + c['time'].to_s  + "<br>"
 		message << "Pre block is " + c['pre block'].to_s + "<br>"
 		message << "Current block is " + Digest::SHA256.hexdigest(c.to_s) + "<br>"
+		message << "transaction is " + c['transaction'].to_s + "<br>"
 		message << "<hr>"
 	end
 
@@ -25,10 +26,20 @@ get '/mine' do
 	 "블럭찾았다 " + b.mining.to_s
 end
 
+get '/new_wallet' do
+	b.make_a_wallet
+
+end
+
 get '/transaction' do
-	"person who send : " + params["sender"] +
-	"<br>" + "person who receive : " + params["receiver"] +"<br>"
-	+ "amount of transaction : " + params["amount"]
+	# "person who send : " + params["sender"] +
+	# "<br>" + "person who receive : " + params["receiver"] +"<br>"
+	# + "amount of transaction : " + params["amount"]
 
 	b.trans(params["sender"], params["receiver"], params["amount"])
+	
 end
+
+get '/all_wallet' do
+	b.show_all_wallet.to_s
+	end
