@@ -1,5 +1,6 @@
 require 'digest'
 require 'securerandom'
+require 'httparty'
 
 class Blockchain
 
@@ -7,6 +8,7 @@ class Blockchain
 		@chain = []
 		@transaction = []
 		@wallet = {} #information that have hash값
+		@node = [] #우리는 일단 이곳에 port만 들어감.
 	end
 
 	def make_a_wallet
@@ -17,7 +19,7 @@ class Blockchain
 	end
 
 	def trans(s, r, a) #trans를 돌릴 때는 sender, receiver, amount가 있어야 돌린다.라는 의미
-puts @wallet[s]
+		puts @wallet[s]
 		if @wallet[s].nil?
 			"not exist wallet"
 		elsif @wallet[r].nil?
@@ -74,6 +76,22 @@ def show_all_wallet
 	@wallet
 end
 
-
+def get_other_blocks
+	@node.each do |n|
+		other_blocks = HTTParty.get("http://localhost:" + n.to_s + "/total_blocks").body
+		if @chain.size < other_blocks.to_i
+			@chain = []
+		end
+	end
 end
 
+def add_node(node)
+	@node << node
+	node
+end
+
+def total_nodes
+	@node
+end
+
+end

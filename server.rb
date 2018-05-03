@@ -1,11 +1,12 @@
 require 'sinatra'
 require "sinatra/reloader"
 
+
 #같은 디렉토리에 있다고 표시하는 것이 .점 그 상태에서 /는 디렉토리 위치를 표시 파일 이름에 .rb는 생략함
 require './block'
 
 b = Blockchain.new
-  
+
 get '/' do 
 	message = ""
 	b.current_chain.each do |c|
@@ -18,12 +19,12 @@ get '/' do
 		message << "<hr>"
 	end
 
-message
+	message
 
 end	
-	
+
 get '/mine' do
-	 "블럭찾았다 " + b.mining.to_s
+	"블럭찾았다 " + b.mining.to_s
 end
 
 get '/new_wallet' do
@@ -42,4 +43,21 @@ end
 
 get '/all_wallet' do
 	b.show_all_wallet.to_s
-	end
+end
+
+get '/total_blocks' do
+	b.current_chain.size.to_s
+end
+
+get '/other_blocks' do
+	b.get_other_blocks.to_s
+end
+
+get '/register' do
+	b.add_node(params["node"])
+end
+
+get '/my_nodes' do
+	b.total_nodes.to_s
+end
+
