@@ -1,5 +1,6 @@
 require 'sinatra'
 require "sinatra/reloader"
+require 'json'
 
 
 #같은 디렉토리에 있다고 표시하는 것이 .점 그 상태에서 /는 디렉토리 위치를 표시 파일 이름에 .rb는 생략함
@@ -61,3 +62,8 @@ get '/my_nodes' do
 	b.total_nodes.to_s
 end
 
+get '/get_blocks' do
+	new_blocks = JSON.parse(params["blocks"])
+	b.add_new_blocks(new_blocks)
+	b.current_chain.to_json
+end
